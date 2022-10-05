@@ -4,7 +4,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-map.locate({enableHighAccuracy: true})
+map.locate({watch: true, enableHighAccuracy:true})
 map.on('locationfound', (e) => {
     const cords = [e.latitude, e.longitude]
     const marker = L.marker(cords)
@@ -18,12 +18,4 @@ socket.on("serverCoords", (coords) => {
     marker.bindPopup("Estas aqui!")
     map.addLayer(marker);
 })
-
-const refresh = () => {
-    location.reload()
-}
-
-setInterval(() => {
-    refresh()
-}, 5000);
 
