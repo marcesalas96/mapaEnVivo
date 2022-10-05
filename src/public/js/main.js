@@ -19,3 +19,11 @@ socket.on("serverCoords", (coords) => {
     map.addLayer(marker);
 })
 
+const refresh = () => {
+    location.reload()
+}
+
+setInterval(() => {
+    refresh()
+}, 5000);
+
