@@ -7,18 +7,13 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 map.locate({watch: true, enableHighAccuracy:true})
 map.on('locationfound', (e) => {
     const cords = [e.latitude, e.longitude]
-    const marker = L.marker(cords)
-    marker.bindPopup("Estas aqui!")
-    map.addLayer(marker);
     socket.emit("clientCoords", cords)
 })
-
-socket.on("serverCoords", (coords) => {
-    setInterval(()=>{
-        const marker = L.marker(coords)
-        marker.bindPopup("Estas aqui!")
-        map.addLayer(marker);
-    },5000)
+socket.on("serverCoords", async (coords) => {
+    const marker = L.marker(coords)
     map.removeLayer(marker)
-})
+    marker.bindPopup("Estas aqui!")
+    map.addLayer(marker);
+    })
+    
 
