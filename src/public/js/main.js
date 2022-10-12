@@ -14,8 +14,11 @@ map.on('locationfound', (e) => {
 })
 
 socket.on("serverCoords", (coords) => {
-    const marker = L.marker(coords)
-    marker.bindPopup("Estas aqui!")
-    map.addLayer(marker);
+    setInterval(()=>{
+        const marker = L.marker(coords)
+        marker.bindPopup("Estas aqui!")
+        map.addLayer(marker);
+    },5000)
+    map.removeLayer(marker)
 })
 
