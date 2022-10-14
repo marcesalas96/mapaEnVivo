@@ -15,15 +15,16 @@ setInterval(() => {
 }, 5000)
 
 
-let marker
-socket.on("serverCoords", async (coords) => {
-    if (marker) {
-        console.log("Entre if")
-        map.removeLayer(marker)
-    }
-    marker = L.marker(coords)
+socket.on("serverCoords", (coords) => {
+    // if (marker) {
+    //     map.removeLayer(marker)
+    // }
+    const marker = L.marker(coords)
     marker.bindPopup("Estas aqui!")
-    map.addLayer(marker);
+    map.addLayer(marker)
+    setTimeout(() => {
+        map.removeLayer(marker)
+    },5000)
 })
 
 
